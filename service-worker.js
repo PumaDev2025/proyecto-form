@@ -3,7 +3,6 @@
 
 const CACHE_NAME = 'liderazgo-terreno-v1';
 const ASSETS_TO_CACHE = [
-    './',
     './index.html',
     './styles.css',
     './app.js',

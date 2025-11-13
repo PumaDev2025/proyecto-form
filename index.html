@@ -26,8 +26,9 @@
     <div class="container">
         <header class="app-header">
             <div class="logo-section">
-                <h1>📋 Lista de Verificación</h1>
-                <p class="subtitle">Liderazgo en Terreno</p>
+                <div class="puma-logo">🐆 PUMA</div>
+                <h1>Programa de Cultura de Seguridad</h1>
+                <p class="subtitle">Liderazgo Visible en Terreno</p>
             </div>
             <div class="status-badge" id="statusBadge">
                 <span class="status-dot"></span>
@@ -38,79 +39,113 @@
         <main class="main-content">
             <form id="leadershipForm" class="leadership-form">
                 
-                <!-- SECCIÓN 1: INFORMACIÓN GENERAL -->
+                <!-- SECCIÓN 1: PLANIFICACIÓN PREVIA -->
                 <section class="form-section">
                     <div class="section-header">
                         <h2 class="section-title">
-                            <span class="section-icon">👤</span>
-                            Información General
+                            <span class="section-icon">📝</span>
+                            1. Planificación Previa
                         </h2>
                         <span class="required-note">* Campos obligatorios</span>
                     </div>
                     
                     <div class="form-grid">
                         <div class="form-group">
-                            <label for="evaluatorName" class="form-label required">Nombre del Evaluador *</label>
-                            <input type="text" id="evaluatorName" name="evaluatorName" class="form-input" required 
+                            <label for="visitorName" class="form-label required">Nombre de quien visita *</label>
+                            <input type="text" id="visitorName" name="visitorName" class="form-input" required 
                                    placeholder="Ingrese su nombre completo" aria-required="true">
-                            <span class="error-message" data-error="evaluatorName"></span>
+                            <span class="error-message" data-error="visitorName"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="evaluatorPosition" class="form-label required">Cargo del Evaluador *</label>
-                            <input type="text" id="evaluatorPosition" name="evaluatorPosition" class="form-input" required 
-                                   placeholder="Ej: Gerente Regional" aria-required="true">
-                            <span class="error-message" data-error="evaluatorPosition"></span>
+                            <label for="visitDate" class="form-label required">Fecha *</label>
+                            <input type="date" id="visitDate" name="visitDate" class="form-input" required aria-required="true">
+                            <span class="error-message" data-error="visitDate"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="leaderName" class="form-label required">Nombre del Líder Evaluado *</label>
-                            <input type="text" id="leaderName" name="leaderName" class="form-input" required 
-                                   placeholder="Nombre completo del líder" aria-required="true">
-                            <span class="error-message" data-error="leaderName"></span>
+                            <label for="visitTime" class="form-label required">Hora *</label>
+                            <input type="time" id="visitTime" name="visitTime" class="form-input" required aria-required="true">
+                            <span class="error-message" data-error="visitTime"></span>
                         </div>
 
                         <div class="form-group">
-                            <label for="leaderPosition" class="form-label required">Cargo del Líder *</label>
-                            <input type="text" id="leaderPosition" name="leaderPosition" class="form-input" required 
-                                   placeholder="Cargo del líder evaluado" aria-required="true">
-                            <span class="error-message" data-error="leaderPosition"></span>
+                            <label for="workCenter" class="form-label required">Centro de trabajo *</label>
+                            <input type="text" id="workCenter" name="workCenter" class="form-input" required 
+                                   placeholder="Ej: Planta Norte" aria-required="true">
+                            <span class="error-message" data-error="workCenter"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label for="area" class="form-label required">Área/Departamento *</label>
-                            <select id="area" name="area" class="form-select" required aria-required="true">
-                                <option value="">Seleccione un área</option>
-                                <option value="operaciones">Operaciones</option>
-                                <option value="produccion">Producción</option>
-                                <option value="logistica">Logística</option>
-                                <option value="calidad">Calidad</option>
-                                <option value="mantenimiento">Mantenimiento</option>
-                                <option value="comercial">Comercial</option>
-                                <option value="administracion">Administración</option>
-                                <option value="rrhh">Recursos Humanos</option>
-                                <option value="otro">Otro</option>
-                            </select>
-                            <span class="error-message" data-error="area"></span>
+                        <div class="form-group full-width">
+                            <label for="operationLocation" class="form-label required">Operación/lugar a visitar *</label>
+                            <input type="text" id="operationLocation" name="operationLocation" class="form-input" required 
+                                   placeholder="Especifique la operación o lugar" aria-required="true">
+                            <span class="error-message" data-error="operationLocation"></span>
                         </div>
 
-                        <div class="form-group">
-                            <label for="location" class="form-label required">Ubicación/Planta *</label>
-                            <input type="text" id="location" name="location" class="form-input" required 
-                                   placeholder="Ej: Planta Norte, Sucursal Lima" aria-required="true">
-                            <span class="error-message" data-error="location"></span>
+                        <div class="form-group full-width">
+                            <label for="criticalRisk" class="form-label required">Riesgo crítico a observar *</label>
+                            <input type="text" id="criticalRisk" name="criticalRisk" class="form-input" required 
+                                   placeholder="Indique el riesgo crítico" aria-required="true">
+                            <span class="error-message" data-error="criticalRisk"></span>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="evaluationDate" class="form-label required">Fecha de Evaluación *</label>
-                            <input type="date" id="evaluationDate" name="evaluationDate" class="form-input" required aria-required="true">
-                            <span class="error-message" data-error="evaluationDate"></span>
-                        </div>
+                    <!-- Tabla de Foco u Objetivo de la Visita -->
+                    <div class="form-group full-width">
+                        <label class="form-label required">Foco u objetivo de la visita *</label>
+                        <p class="field-description">Seleccione el tipo de visita que realizará (marque una opción):</p>
+                        
+                        <div class="visit-focus-table">
+                            <div class="focus-item">
+                                <div class="focus-header">
+                                    <input type="radio" id="focus1" name="visitFocus" value="indagacion" required>
+                                    <label for="focus1">
+                                        <strong>1. De indagación general</strong>
+                                    </label>
+                                </div>
+                                <p class="focus-description">
+                                    Busca indagar la percepción general de riesgos del lugar de trabajo, e identificar posibles alertas no identificadas inicialmente.
+                                </p>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="evaluationTime" class="form-label">Hora de Evaluación</label>
-                            <input type="time" id="evaluationTime" name="evaluationTime" class="form-input">
+                            <div class="focus-item">
+                                <div class="focus-header">
+                                    <input type="radio" id="focus2" name="visitFocus" value="implementacion" required>
+                                    <label for="focus2">
+                                        <strong>2. De implementación de intervenciones</strong>
+                                    </label>
+                                </div>
+                                <p class="focus-description">
+                                    Busca evaluar la efectividad de una medida de control o interventiva en el lugar de trabajo, luego de haberse generado algún riesgo.
+                                </p>
+                            </div>
+
+                            <div class="focus-item">
+                                <div class="focus-header">
+                                    <input type="radio" id="focus3" name="visitFocus" value="critico" required>
+                                    <label for="focus3">
+                                        <strong>3. De foco crítico</strong>
+                                    </label>
+                                </div>
+                                <p class="focus-description">
+                                    Busca evaluar alguna operación o riesgo crítico específico del lugar de trabajo, a fin de detectar posibles desviaciones o riesgos asociados.
+                                </p>
+                            </div>
+
+                            <div class="focus-item">
+                                <div class="focus-header">
+                                    <input type="radio" id="focus4" name="visitFocus" value="emergente" required>
+                                    <label for="focus4">
+                                        <strong>4. De sospecha de riesgo emergente</strong>
+                                    </label>
+                                </div>
+                                <p class="focus-description">
+                                    Busca conocer posibles riesgos no detectados en una determinada operación, la que puede ser nueva o antigua.
+                                </p>
+                            </div>
                         </div>
+                        <span class="error-message" data-error="visitFocus"></span>
                     </div>
                 </section>
 
@@ -633,11 +668,13 @@
     
     <!-- PWA Service Worker -->
     <script>
-        if ('serviceWorker' in navigator) {
+        // Service Worker solo funciona con HTTPS o localhost con servidor
+        // Para uso local directo (file://), las funciones principales siguen disponibles
+        if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
                     .then(registration => console.log('ServiceWorker registrado:', registration))
-                    .catch(error => console.log('Error al registrar ServiceWorker:', error));
+                    .catch(error => console.log('Nota: ServiceWorker no disponible en file://', error));
             });
         }
     </script>

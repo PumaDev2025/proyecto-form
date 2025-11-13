@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Programa de Cultura de Seguridad - Liderazgo Visible en Terreno PUMA">
+    <meta name="theme-color" content="#2c3e50">
+    
+    <title>PUMA - Liderazgo Visible en Terreno</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .puma-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .visit-focus-table {
+            margin-top: 1rem;
+        }
+        
+        .focus-item {
+            background: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .focus-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .focus-header input[type="radio"] {
+            margin-top: 0.25rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .focus-header label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .focus-description {
+            margin-left: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .question-group {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .question-number {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .question-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .field-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .subsection-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .attitude-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .attitude-option {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .attitude-option:hover {
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .attitude-option input[type="radio"]:checked + label {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            box-shadow: var(--shadow-sm);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table input[type="text"],
+        .data-table textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: var(--font-family);
+        }
+        
+        .data-table textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .add-row-btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .add-row-btn:hover {
+            background: var(--secondary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Indicador de guardado automático -->
+    <div id="autoSaveIndicator" class="auto-save-indicator">
+        <span class="indicator-dot"></span>
+        <span class="indicator-text">Guardado automático</span>
+    </div>
+
+    <div class="container">
+        <header class="app-header">
+            <div class="logo-section">
+                <div class="puma-logo">🐆 PUMA</div>
+                <h1>Programa de Cultura de Seguridad</h1>
+                <p class="subtitle">Liderazgo Visible en Terreno</p>
+            </div>
+            <div class="status-badge" id="statusBadge">
+                <span class="status-dot"></span>
+                <span>Borrador</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <form id="leadershipForm" class="leadership-form">
+                
+                <!-- SECCIÓN 1: PLANIFICACIÓN PREVIA -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">📝</span>
+                            1. Planificación Previa
+                        </h2>
+                        <span class="required-note">* Campos obligatorios</span>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="visitorName" class="form-label required">Nombre de quien visita *</label>
+                            <input type="text" id="visitorName" name="visitorName" class="form-input" required 
+                                   placeholder="Ingrese su nombre completo">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="visitDate" class="form-label required">Fecha *</label>
+                            <input type="date" id="visitDate" name="visitDate" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="visitTime" class="form-label required">Hora *</label>
+                            <input type="time" id="visitTime" name="visitTime" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="workCenter" class="form-label required">Centro de trabajo *</label>
+                            <input type="text" id="workCenter" name="workCenter" class="form-input" required 
+                                   placeholder="Ej: Planta Norte">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="operationLocation" class="form-label required">Operación/lugar a visitar *</label>
+                            <input type="text" id="operationLocation" name="operationLocation" class="form-input" required 
+                                   placeholder="Especifique la operación o lugar">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="criticalRisk" class="form-label required">Riesgo crítico a observar *</label>
+                            <input type="text" id="criticalRisk" name="criticalRisk" class="form-input" required 
+                                   placeholder="Indique el riesgo crítico">
+                        </div>
+                    </div>
+
+                    <!-- Tabla de Foco u Objetivo de la Visita -->
+                    <div class="form-group full-width">
+                        <label class="form-label required">Foco u objetivo de la visita *</label>
+                        <p class="field-description">Seleccione el tipo de visita que realizará (marque una opción):</p>
+                        
+                        <div class="visit-focus-table">
+                            <div class="focus-item">
+                                <div class="focus-header">
+                                    <input type="radio" id="focus1" name="visitFocus" value="indagacion" required>
+                                    <label for="focus1">
+                                        <strong>1. De indagación general</strong>
+                                    </label>
+                                </div>
+                                <p class="focus-description">
+                                    Busca indagar la percepción general de riesgos del lugar de trabajo, e identificar posibles alertas no identificadas inicialmente.
+                                </p>
+                            </div>
+
+                            <div class="focus-item">
+                                <div class="focus-header">
+                                    <input type="radio" id="focus2" name="visitFocus" value="implementacion" required>
+                                    <label for="focus2">
+                                        <strong>2. De implementación de intervenciones</strong>
+                                    </label>
+                                </div>
+                                <p class="focus-description">
+                                    Busca evaluar la efectividad de una medida de control o interventiva en el lugar de trabajo, luego de haberse generado algún riesgo.
+                                </p>
+                            </div>
+
+                            <div class="focus-item">
+                                <div class="focus-header">
+                                    <input type="radio" id="focus3" name="visitFocus" value="critico" required>
+                                    <label for="focus3">
+                                        <strong>3. De foco crítico</strong>
+                                    </label>
+                                </div>
+                                <p class="focus-description">
+                                    Busca evaluar alguna operación o riesgo crítico específico del lugar de trabajo, a fin de detectar posibles desviaciones o riesgos asociados.
+                                </p>
+                            </div>
+
+                            <div class="focus-item">
+                                <div class="focus-header">
+                                    <input type="radio" id="focus4" name="visitFocus" value="emergente" required>
+                                    <label for="focus4">
+                                        <strong>4. De sospecha de riesgo emergente</strong>
+                                    </label>
+                                </div>
+                                <p class="focus-description">
+                                    Busca conocer posibles riesgos no detectados en una determinada operación, la que puede ser nueva o antigua.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2: DURANTE LA VISITA -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">👁️</span>
+                            2. Durante la Visita
+                        </h2>
+                    </div>
+
+                    <!-- 2.1 INDAGACIÓN GENERAL -->
+                    <h3 class="subsection-title">2.1 Indagación General</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.</span>
+                            ¿Cómo evaluaría la seguridad de su lugar de trabajo?
+                        </div>
+                        <textarea name="q2_1_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">2.</span>
+                            ¿Qué aspectos consideran podrían mantenerse de lo que actualmente se está haciendo?
+                        </div>
+                        <textarea name="q2_1_2" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.</span>
+                            ¿Qué considera podría cambiar?
+                        </div>
+                        <textarea name="q2_1_3" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.</span>
+                            ¿Hay algún riesgo que considere no está controlado actualmente?
+                        </div>
+                        <textarea name="q2_1_4" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">5.</span>
+                            ¿Se realiza el HCR/ART en conjunto y se dan a conocer las actividades, riesgos y medidas de control antes de iniciar los trabajos?
+                        </div>
+                        <textarea name="q2_1_5" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">6.</span>
+                            ¿Se aplican las Reglas por la Vida de un PUMA?
+                        </div>
+                        <textarea name="q2_1_6" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">7.</span>
+                            ¿Se realiza el MOT antes del inicio de cada jornada de trabajo?
+                        </div>
+                        <textarea name="q2_1_7" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">8.</span>
+                            ¿Cómo cree podría mejorarse?
+                        </div>
+                        <textarea name="q2_1_8" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">9.</span>
+                            Actualmente, en su lugar de trabajo, ¿hay alguna acción que normalmente se esté haciendo y que, de continuar de dicha manera, podría generar un accidente?
+                        </div>
+                        <textarea name="q2_1_9" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <!-- 2.2 VERIFICACIÓN DE IMPLEMENTACIÓN -->
+                    <h3 class="subsection-title">2.2 Verificación de Implementación (Intervenciones)</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.</span>
+                            ¿Cómo evaluaría la efectividad de la medida implementada?
+                        </div>
+                        <textarea name="q2_2_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">2.</span>
+                            ¿Considera que logra controlar todos los riesgos asociados, o podría mejorarse de alguna manera?
+                        </div>
+                        <textarea name="q2_2_2" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.</span>
+                            Desde su perspectiva, ¿esta situación resuelve el riesgo detectado?
+                        </div>
+                        <textarea name="q2_2_3" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.</span>
+                            En esta misma operación, ¿hay alguna otra situación que podría generar un riesgo importante?
+                        </div>
+                        <textarea name="q2_2_4" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.1</span>
+                            De ser así, ¿cómo cree podría mejorarse?
+                        </div>
+                        <textarea name="q2_2_4_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">5.</span>
+                            ¿Cómo considera podría mejorarse, a nivel general, la seguridad de su lugar de trabajo?
+                        </div>
+                        <textarea name="q2_2_5" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <!-- 2.3 DE FOCO CRÍTICO -->
+                    <h3 class="subsection-title">2.3 De Foco Crítico</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.</span>
+                            De todas las actividades que usted realiza, ¿qué operación considera crítica en sentido de tener el potencial de generar un accidente grave tanto para usted como para sus compañeros?
+                        </div>
+                        <textarea name="q2_3_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">2.</span>
+                            ¿Se analizan en el HCR/ART y se dejan estipuladas en el MOT?
+                        </div>
+                        <textarea name="q2_3_2" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.</span>
+                            De esas operaciones, ¿cuáles son sus riesgos críticos o aquellos que pueden generar accidentes graves?
+                        </div>
+                        <textarea name="q2_3_3" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.</span>
+                            ¿Hay alguna situación de seguridad que, actualmente, no esté controlada de su lugar de trabajo y que considere importante de abordar?
+                        </div>
+                        <textarea name="q2_3_4" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">5.</span>
+                            Desde su perspectiva, ¿qué mejoras considera se podrían hacer para mejorar la seguridad de su lugar de trabajo?
+                        </div>
+                        <textarea name="q2_3_5" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">6.</span>
+                            ¿Ha observado alguna situación, no sólo de su puesto de trabajo, sino de otras operaciones, en que considere podría haber un riesgo importante de abordar?
+                        </div>
+                        <textarea name="q2_3_6" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <!-- 2.4 DE SOSPECHA DE RIESGO EMERGENTE -->
+                    <h3 class="subsection-title">2.4 De Sospecha de Riesgo Emergente</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.</span>
+                            ¿Qué riesgos logra identificar en la operación que está ejecutando?
+                        </div>
+                        <textarea name="q2_4_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">2.</span>
+                            ¿Cómo considera que es el control de los riesgos en ejecución?
+                        </div>
+                        <textarea name="q2_4_2" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.</span>
+                            De esas operaciones, ¿cuáles son sus riesgos críticos o aquellos que pueden generar accidentes graves?
+                        </div>
+                        <textarea name="q2_4_3" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.</span>
+                            ¿Cómo considera se podría mejorar la seguridad de su operación?
+                        </div>
+                        <textarea name="q2_4_4" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">5.</span>
+                            De los controles que se han efectuado para evitar accidentes, ¿hay alguno que no esté funcionando correctamente, o alguna medida preventiva adicional a considerar?
+                        </div>
+                        <textarea name="q2_4_5" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <!-- ACTITUD Y PERCEPCIÓN -->
+                    <h3 class="subsection-title">Actitud y Percepción Durante la Conversación</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">1.1 ¿Cómo fue la actitud del entrevistado al momento de conversar?</label>
+                        <div class="attitude-options">
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude1_open" name="intervieweeAttitude" value="abierta">
+                                <label for="attitude1_open">Abierta, agradable</label>
+                            </div>
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude1_neutral" name="intervieweeAttitude" value="neutral">
+                                <label for="attitude1_neutral">Neutral, reservada</label>
+                            </div>
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude1_closed" name="intervieweeAttitude" value="cerrada">
+                                <label for="attitude1_closed">Cerrada, suspicaz</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">1.2 ¿Cómo se sintió usted al momento de conversar?</label>
+                        <div class="attitude-options">
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude2_open" name="interviewerFeeling" value="abierta">
+                                <label for="attitude2_open">Abierta, agradable</label>
+                            </div>
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude2_neutral" name="interviewerFeeling" value="neutral">
+                                <label for="attitude2_neutral">Neutral, reservada</label>
+                            </div>
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude2_closed" name="interviewerFeeling" value="cerrada">
+                                <label for="attitude2_closed">Cerrada, suspicaz</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.3</span>
+                            ¿Cómo cree que podría mejorar, o qué considera faltó por indagar?
+                        </div>
+                        <textarea name="improvementNotes" class="form-textarea" rows="4" 
+                                  placeholder="Reflexión sobre la entrevista..."></textarea>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3: DESPUÉS DE LA VISITA -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">📊</span>
+                            3. Después de la Visita
+                        </h2>
+                    </div>
+
+                    <p class="field-description">
+                        Recuerde volcar sus hallazgos en la matriz adjunta. Considere sólo los casilleros sobre los temas que efectivamente fueron abordados:
+                    </p>
+
+                    <!-- Tabla de Hallazgos -->
+                    <div class="form-group full-width">
+                        <label class="form-label">Matriz de Hallazgos</label>
+                        <table class="data-table" id="findingsTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%;">Operación crítica revisada</th>
+                                    <th style="width: 20%;">Riesgo crítico asociado</th>
+                                    <th style="width: 20%;">Riesgos latentes o activos mencionados</th>
+                                    <th style="width: 20%;">Posibles mejoras señaladas</th>
+                                    <th style="width: 20%;">Hallazgos referidos</th>
+                                </tr>
+                            </thead>
+                            <tbody id="findingsTableBody">
+                                <tr>
+                                    <td><textarea name="findings_operation_1" rows="3"></textarea></td>
+                                    <td><textarea name="findings_risk_1" rows="3"></textarea></td>
+                                    <td><textarea name="findings_latent_1" rows="3"></textarea></td>
+                                    <td><textarea name="findings_improvements_1" rows="3"></textarea></td>
+                                    <td><textarea name="findings_referred_1" rows="3"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><textarea name="findings_operation_2" rows="3"></textarea></td>
+                                    <td><textarea name="findings_risk_2" rows="3"></textarea></td>
+                                    <td><textarea name="findings_latent_2" rows="3"></textarea></td>
+                                    <td><textarea name="findings_improvements_2" rows="3"></textarea></td>
+                                    <td><textarea name="findings_referred_2" rows="3"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="add-row-btn" onclick="addFindingsRow()">➕ Agregar Fila</button>
+                    </div>
+
+                    <p class="field-description" style="margin-top: 2rem;">
+                        Luego, seleccione los riesgos que considere críticos o pertinentes de solucionar:
+                    </p>
+
+                    <!-- Tabla de Plan de Acción -->
+                    <div class="form-group full-width">
+                        <label class="form-label">Plan de Acción para Riesgos Críticos</label>
+                        <table class="data-table" id="actionPlanTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%;">Riesgo crítico detectado</th>
+                                    <th style="width: 25%;">Posible solución</th>
+                                    <th style="width: 20%;">Responsable de implementación</th>
+                                    <th style="width: 17.5%;">Plazo de implementación</th>
+                                    <th style="width: 17.5%;">Plazo para retroalimentar al trabajador</th>
+                                </tr>
+                            </thead>
+                            <tbody id="actionPlanTableBody">
+                                <tr>
+                                    <td><textarea name="action_risk_1" rows="3"></textarea></td>
+                                    <td><textarea name="action_solution_1" rows="3"></textarea></td>
+                                    <td><input type="text" name="action_responsible_1"></td>
+                                    <td><input type="date" name="action_deadline_1"></td>
+                                    <td><input type="date" name="action_feedback_1"></td>
+                                </tr>
+                                <tr>
+                                    <td><textarea name="action_risk_2" rows="3"></textarea></td>
+                                    <td><textarea name="action_solution_2" rows="3"></textarea></td>
+                                    <td><input type="text" name="action_responsible_2"></td>
+                                    <td><input type="date" name="action_deadline_2"></td>
+                                    <td><input type="date" name="action_feedback_2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="add-row-btn" onclick="addActionPlanRow()">➕ Agregar Fila</button>
+                    </div>
+
+                    <!-- Retroalimentación al Trabajador -->
+                    <h3 class="subsection-title">Sobre la Retroalimentación al Trabajador</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.1</span>
+                            Sea concreto con lo reportado y cómo se resolverá o se resolvió, a fin de dar cuenta de que lo indicado pudo ser resuelto.
+                        </div>
+                        <textarea name="feedback_concrete" class="form-textarea" rows="3" 
+                                  placeholder="Descripción de cómo se abordará lo reportado..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.2</span>
+                            Reconozca y valore las sugerencias y reportes mencionadas por el trabajador, y agradezca su participación.
+                        </div>
+                        <textarea name="feedback_acknowledgment" class="form-textarea" rows="3" 
+                                  placeholder="Reconocimiento y agradecimiento..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.3</span>
+                            Refuerce que se mantendrá su confidencialidad sobre lo indicado, a menos que el trabajador indique o solicite lo contrario.
+                        </div>
+                        <textarea name="feedback_confidentiality" class="form-textarea" rows="3" 
+                                  placeholder="Confirmación de confidencialidad..."></textarea>
+                    </div>
+                </section>
+
+                <!-- Botones de Acción -->
+                <div class="form-actions">
+                    <button type="button" id="clearBtn" class="btn btn-secondary">
+                        <span class="btn-icon">🗑️</span>
+                        Limpiar Formulario
+                    </button>
+                    
+                    <button type="button" id="saveBtn" class="btn btn-info">
+                        <span class="btn-icon">💾</span>
+                        Guardar Borrador
+                    </button>
+                    
+                    <button type="button" id="downloadPdfBtn" class="btn btn-primary">
+                        <span class="btn-icon">📄</span>
+                        Descargar PDF
+                    </button>
+                </div>
+
+            </form>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>PUMA - Programa de Cultura de Seguridad v1.0</p>
+            <p class="footer-note">Todos los datos se guardan localmente en su dispositivo</p>
+        </footer>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">⚠️ Confirmación</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">¿Está seguro de que desea realizar esta acción?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modalCancelBtn" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="modalConfirmBtn" class="btn btn-danger">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificaciones -->
+    <div id="toast" class="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="app_puma.js"></script>
+    
+    <!-- PWA Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => console.log('ServiceWorker registrado:', registration))
+                    .catch(error => console.log('Nota: ServiceWorker no disponible en file://', error));
+            });
+        }
+    </script>
+    
+    <script>
+        // Funciones para agregar filas a las tablas
+        let findingsRowCount = 2;
+        let actionPlanRowCount = 2;
+        
+        function addFindingsRow() {
+            findingsRowCount++;
+            const tbody = document.getElementById('findingsTableBody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><textarea name="findings_operation_${findingsRowCount}" rows="3"></textarea></td>
+                <td><textarea name="findings_risk_${findingsRowCount}" rows="3"></textarea></td>
+                <td><textarea name="findings_latent_${findingsRowCount}" rows="3"></textarea></td>
+                <td><textarea name="findings_improvements_${findingsRowCount}" rows="3"></textarea></td>
+                <td><textarea name="findings_referred_${findingsRowCount}" rows="3"></textarea></td>
+            `;
+        }
+        
+        function addActionPlanRow() {
+            actionPlanRowCount++;
+            const tbody = document.getElementById('actionPlanTableBody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><textarea name="action_risk_${actionPlanRowCount}" rows="3"></textarea></td>
+                <td><textarea name="action_solution_${actionPlanRowCount}" rows="3"></textarea></td>
+                <td><input type="text" name="action_responsible_${actionPlanRowCount}"></td>
+                <td><input type="date" name="action_deadline_${actionPlanRowCount}"></td>
+                <td><input type="date" name="action_feedback_${actionPlanRowCount}"></td>
+            `;
+        }
+    </script>
+</body>
+</html>

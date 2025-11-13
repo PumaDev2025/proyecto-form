@@ -1,8 +1,8 @@
 {
-  "name": "Lista de Verificación Liderazgo",
-  "short_name": "Liderazgo",
-  "description": "Aplicación para evaluar el liderazgo en terreno de manera eficiente",
-  "start_url": "./index.html",
+  "name": "PUMA - Liderazgo Visible en Terreno",
+  "short_name": "PUMA LVT",
+  "description": "Programa de Cultura de Seguridad - Liderazgo Visible en Terreno",
+  "start_url": "./index_puma.html",
   "display": "standalone",
   "background_color": "#2c3e50",
   "theme_color": "#2c3e50",
