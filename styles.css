@@ -107,35 +107,63 @@ body {
    HEADER
    ================================ */
 .app-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    color: var(--text-white);
-    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #2E4C8C 0%, #1a3a6b 100%);
+    color: white;
+    padding: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: var(--spacing-md);
-    border-bottom: 4px solid var(--secondary-color);
+    gap: 2rem;
+    border-bottom: 4px solid #F47920;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
 
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
+    gap: 15px;
 }
 
 .puma-logo-img {
-    height: 50px;
+    height: 60px;
     width: auto;
-    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.2));
+    filter: brightness(0) invert(1);
 }
 
-.puma-logo {
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.puma-title {
     font-size: 2rem;
     font-weight: bold;
-    color: var(--secondary-color);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    color: white;
+    line-height: 1;
+    letter-spacing: 2px;
+}
+
+.puma-subtitle {
+    font-size: 0.75rem;
+    color: #F47920;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border-top: 2px solid #F47920;
+    padding-top: 2px;
+}
+
+.header-titles {
+    flex: 1;
+    min-width: 250px;
+}
+
+.header-titles h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: white;
 }
 
 .logo-section h1 {
@@ -145,9 +173,11 @@ body {
 }
 
 .subtitle {
-    font-size: var(--font-size-lg);
-    opacity: 0.9;
+    font-size: 1rem;
+    opacity: 0.95;
     font-weight: 300;
+    margin: 0;
+    color: rgba(255,255,255,0.9);
 }
 
 .status-badge {
@@ -654,39 +684,45 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+    background: linear-gradient(135deg, #2E4C8C 0%, #1a3a6b 100%);
     color: white;
+    border: none;
 }
 
 .btn-primary:hover {
-    background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--secondary-color) 100%);
+    background: linear-gradient(135deg, #1a3a6b 0%, #2E4C8C 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(46, 76, 140, 0.3);
 }
 
 .btn-secondary {
-    background: var(--text-secondary);
+    background: linear-gradient(135deg, #F47920 0%, #d96b1a 100%);
     color: white;
+    border: none;
 }
 
 .btn-secondary:hover {
-    background: var(--text-primary);
+    background: linear-gradient(135deg, #d96b1a 0%, #F47920 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(244, 121, 32, 0.3);
 }
 
 .btn-info {
-    background: var(--info-color);
+    background: linear-gradient(135deg, #2E4C8C 0%, #1a3a6b 100%);
     color: white;
 }
 
 .btn-info:hover {
-    background: var(--secondary-dark);
+    background: linear-gradient(135deg, #1a3a6b 0%, #2E4C8C 100%);
 }
 
 .btn-danger {
-    background: var(--accent-color);
+    background: linear-gradient(135deg, #F47920 0%, #d96b1a 100%);
     color: white;
 }
 
 .btn-danger:hover {
-    background: #c0392b;
+    background: linear-gradient(135deg, #d96b1a 0%, #F47920 100%);
 }
 
 /* ================================
