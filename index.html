@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Lista de Verificación de Liderazgo en Terreno">
+    <meta name="theme-color" content="#2c3e50">
+    
+    <title>Lista de Verificación - Liderazgo en Terreno</title>
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Indicador de guardado automático -->
+    <div id="autoSaveIndicator" class="auto-save-indicator">
+        <span class="indicator-dot"></span>
+        <span class="indicator-text">Guardado automático</span>
+    </div>
+
+    <div class="container">
+        <header class="app-header">
+            <div class="logo-section">
+                <h1>📋 Lista de Verificación</h1>
+                <p class="subtitle">Liderazgo en Terreno</p>
+            </div>
+            <div class="status-badge" id="statusBadge">
+                <span class="status-dot"></span>
+                <span>Borrador</span>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <form id="leadershipForm" class="leadership-form">
+                
+                <!-- SECCIÓN 1: INFORMACIÓN GENERAL -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">👤</span>
+                            Información General
+                        </h2>
+                        <span class="required-note">* Campos obligatorios</span>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="evaluatorName" class="form-label required">Nombre del Evaluador *</label>
+                            <input type="text" id="evaluatorName" name="evaluatorName" class="form-input" required 
+                                   placeholder="Ingrese su nombre completo" aria-required="true">
+                            <span class="error-message" data-error="evaluatorName"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="evaluatorPosition" class="form-label required">Cargo del Evaluador *</label>
+                            <input type="text" id="evaluatorPosition" name="evaluatorPosition" class="form-input" required 
+                                   placeholder="Ej: Gerente Regional" aria-required="true">
+                            <span class="error-message" data-error="evaluatorPosition"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="leaderName" class="form-label required">Nombre del Líder Evaluado *</label>
+                            <input type="text" id="leaderName" name="leaderName" class="form-input" required 
+                                   placeholder="Nombre completo del líder" aria-required="true">
+                            <span class="error-message" data-error="leaderName"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="leaderPosition" class="form-label required">Cargo del Líder *</label>
+                            <input type="text" id="leaderPosition" name="leaderPosition" class="form-input" required 
+                                   placeholder="Cargo del líder evaluado" aria-required="true">
+                            <span class="error-message" data-error="leaderPosition"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="area" class="form-label required">Área/Departamento *</label>
+                            <select id="area" name="area" class="form-select" required aria-required="true">
+                                <option value="">Seleccione un área</option>
+                                <option value="operaciones">Operaciones</option>
+                                <option value="produccion">Producción</option>
+                                <option value="logistica">Logística</option>
+                                <option value="calidad">Calidad</option>
+                                <option value="mantenimiento">Mantenimiento</option>
+                                <option value="comercial">Comercial</option>
+                                <option value="administracion">Administración</option>
+                                <option value="rrhh">Recursos Humanos</option>
+                                <option value="otro">Otro</option>
+                            </select>
+                            <span class="error-message" data-error="area"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location" class="form-label required">Ubicación/Planta *</label>
+                            <input type="text" id="location" name="location" class="form-input" required 
+                                   placeholder="Ej: Planta Norte, Sucursal Lima" aria-required="true">
+                            <span class="error-message" data-error="location"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="evaluationDate" class="form-label required">Fecha de Evaluación *</label>
+                            <input type="date" id="evaluationDate" name="evaluationDate" class="form-input" required aria-required="true">
+                            <span class="error-message" data-error="evaluationDate"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="evaluationTime" class="form-label">Hora de Evaluación</label>
+                            <input type="time" id="evaluationTime" name="evaluationTime" class="form-input">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 2: CRITERIOS DE EVALUACIÓN -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">⭐</span>
+                            Criterios de Evaluación de Liderazgo
+                        </h2>
+                        <p class="section-description">
+                            Evalúe cada criterio seleccionando el nivel de cumplimiento observado durante la visita en terreno.
+                        </p>
+                    </div>
+
+                    <!-- Escala de evaluación -->
+                    <div class="evaluation-scale">
+                        <div class="scale-item scale-excellent">
+                            <span class="scale-icon">🟢</span>
+                            <strong>Excelente (5)</strong>
+                            <p>Cumplimiento excepcional</p>
+                        </div>
+                        <div class="scale-item scale-good">
+                            <span class="scale-icon">🔵</span>
+                            <strong>Bueno (4)</strong>
+                            <p>Cumplimiento satisfactorio</p>
+                        </div>
+                        <div class="scale-item scale-regular">
+                            <span class="scale-icon">🟡</span>
+                            <strong>Regular (3)</strong>
+                            <p>Cumplimiento mínimo</p>
+                        </div>
+                        <div class="scale-item scale-poor">
+                            <span class="scale-icon">🟠</span>
+                            <strong>Deficiente (2)</strong>
+                            <p>Necesita mejorar</p>
+                        </div>
+                        <div class="scale-item scale-critical">
+                            <span class="scale-icon">🔴</span>
+                            <strong>Crítico (1)</strong>
+                            <p>No cumple</p>
+                        </div>
+                        <div class="scale-item scale-na">
+                            <span class="scale-icon">⚪</span>
+                            <strong>N/A</strong>
+                            <p>No aplica</p>
+                        </div>
+                    </div>
+
+                    <!-- Criterio 1: Comunicación -->
+                    <div class="evaluation-item">
+                        <div class="criterion-header">
+                            <h3 class="criterion-title">1. Comunicación Efectiva</h3>
+                            <span class="required-badge">Requerido</span>
+                        </div>
+                        <p class="criterion-description">
+                            El líder comunica de manera clara, directa y oportuna las metas, expectativas y retroalimentación al equipo.
+                        </p>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="communication" value="5" required>
+                                <span class="rating-label excellent">Excelente (5)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="communication" value="4">
+                                <span class="rating-label good">Bueno (4)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="communication" value="3">
+                                <span class="rating-label regular">Regular (3)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="communication" value="2">
+                                <span class="rating-label poor">Deficiente (2)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="communication" value="1">
+                                <span class="rating-label critical">Crítico (1)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="communication" value="0">
+                                <span class="rating-label na">N/A</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="communicationComments" class="form-label">Observaciones</label>
+                            <textarea id="communicationComments" name="communicationComments" class="form-textarea" 
+                                      rows="3" placeholder="Detalles específicos sobre la comunicación observada..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Criterio 2: Presencia en Terreno -->
+                    <div class="evaluation-item">
+                        <div class="criterion-header">
+                            <h3 class="criterion-title">2. Presencia Activa en Terreno</h3>
+                            <span class="required-badge">Requerido</span>
+                        </div>
+                        <p class="criterion-description">
+                            El líder está presente físicamente en el área de trabajo, interactuando con el equipo y supervisando operaciones.
+                        </p>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="presence" value="5" required>
+                                <span class="rating-label excellent">Excelente (5)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="presence" value="4">
+                                <span class="rating-label good">Bueno (4)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="presence" value="3">
+                                <span class="rating-label regular">Regular (3)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="presence" value="2">
+                                <span class="rating-label poor">Deficiente (2)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="presence" value="1">
+                                <span class="rating-label critical">Crítico (1)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="presence" value="0">
+                                <span class="rating-label na">N/A</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="presenceComments" class="form-label">Observaciones</label>
+                            <textarea id="presenceComments" name="presenceComments" class="form-textarea" 
+                                      rows="3" placeholder="Descripción de la presencia y actividad en terreno..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Criterio 3: Resolución de Problemas -->
+                    <div class="evaluation-item">
+                        <div class="criterion-header">
+                            <h3 class="criterion-title">3. Resolución de Problemas</h3>
+                            <span class="required-badge">Requerido</span>
+                        </div>
+                        <p class="criterion-description">
+                            Capacidad para identificar, analizar y resolver problemas de manera eficiente, involucrando al equipo cuando es necesario.
+                        </p>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="problemSolving" value="5" required>
+                                <span class="rating-label excellent">Excelente (5)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="problemSolving" value="4">
+                                <span class="rating-label good">Bueno (4)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="problemSolving" value="3">
+                                <span class="rating-label regular">Regular (3)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="problemSolving" value="2">
+                                <span class="rating-label poor">Deficiente (2)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="problemSolving" value="1">
+                                <span class="rating-label critical">Crítico (1)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="problemSolving" value="0">
+                                <span class="rating-label na">N/A</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="problemSolvingComments" class="form-label">Observaciones</label>
+                            <textarea id="problemSolvingComments" name="problemSolvingComments" class="form-textarea" 
+                                      rows="3" placeholder="Ejemplos de resolución de problemas observados..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Criterio 4: Trabajo en Equipo -->
+                    <div class="evaluation-item">
+                        <div class="criterion-header">
+                            <h3 class="criterion-title">4. Fomento del Trabajo en Equipo</h3>
+                            <span class="required-badge">Requerido</span>
+                        </div>
+                        <p class="criterion-description">
+                            Promueve la colaboración, reconoce contribuciones y crea un ambiente de confianza y respeto mutuo.
+                        </p>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="teamwork" value="5" required>
+                                <span class="rating-label excellent">Excelente (5)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="teamwork" value="4">
+                                <span class="rating-label good">Bueno (4)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="teamwork" value="3">
+                                <span class="rating-label regular">Regular (3)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="teamwork" value="2">
+                                <span class="rating-label poor">Deficiente (2)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="teamwork" value="1">
+                                <span class="rating-label critical">Crítico (1)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="teamwork" value="0">
+                                <span class="rating-label na">N/A</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="teamworkComments" class="form-label">Observaciones</label>
+                            <textarea id="teamworkComments" name="teamworkComments" class="form-textarea" 
+                                      rows="3" placeholder="Evidencias de trabajo en equipo y colaboración..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Criterio 5: Seguridad y Cumplimiento -->
+                    <div class="evaluation-item">
+                        <div class="criterion-header">
+                            <h3 class="criterion-title">5. Seguridad y Cumplimiento Normativo</h3>
+                            <span class="required-badge">Requerido</span>
+                        </div>
+                        <p class="criterion-description">
+                            Asegura el cumplimiento de normas de seguridad, procedimientos y estándares de calidad en todas las actividades.
+                        </p>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="safety" value="5" required>
+                                <span class="rating-label excellent">Excelente (5)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="safety" value="4">
+                                <span class="rating-label good">Bueno (4)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="safety" value="3">
+                                <span class="rating-label regular">Regular (3)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="safety" value="2">
+                                <span class="rating-label poor">Deficiente (2)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="safety" value="1">
+                                <span class="rating-label critical">Crítico (1)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="safety" value="0">
+                                <span class="rating-label na">N/A</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="safetyComments" class="form-label">Observaciones</label>
+                            <textarea id="safetyComments" name="safetyComments" class="form-textarea" 
+                                      rows="3" placeholder="Aspectos de seguridad y cumplimiento observados..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Criterio 6: Desarrollo del Equipo -->
+                    <div class="evaluation-item">
+                        <div class="criterion-header">
+                            <h3 class="criterion-title">6. Desarrollo y Capacitación del Equipo</h3>
+                            <span class="required-badge">Requerido</span>
+                        </div>
+                        <p class="criterion-description">
+                            Identifica necesidades de capacitación, desarrolla habilidades del equipo y promueve el crecimiento profesional.
+                        </p>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="development" value="5" required>
+                                <span class="rating-label excellent">Excelente (5)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="development" value="4">
+                                <span class="rating-label good">Bueno (4)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="development" value="3">
+                                <span class="rating-label regular">Regular (3)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="development" value="2">
+                                <span class="rating-label poor">Deficiente (2)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="development" value="1">
+                                <span class="rating-label critical">Crítico (1)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="development" value="0">
+                                <span class="rating-label na">N/A</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="developmentComments" class="form-label">Observaciones</label>
+                            <textarea id="developmentComments" name="developmentComments" class="form-textarea" 
+                                      rows="3" placeholder="Acciones de desarrollo y capacitación identificadas..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Criterio 7: Planificación y Organización -->
+                    <div class="evaluation-item">
+                        <div class="criterion-header">
+                            <h3 class="criterion-title">7. Planificación y Organización</h3>
+                            <span class="required-badge">Requerido</span>
+                        </div>
+                        <p class="criterion-description">
+                            Establece prioridades claras, planifica actividades y organiza recursos de manera efectiva.
+                        </p>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="planning" value="5" required>
+                                <span class="rating-label excellent">Excelente (5)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="planning" value="4">
+                                <span class="rating-label good">Bueno (4)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="planning" value="3">
+                                <span class="rating-label regular">Regular (3)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="planning" value="2">
+                                <span class="rating-label poor">Deficiente (2)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="planning" value="1">
+                                <span class="rating-label critical">Crítico (1)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="planning" value="0">
+                                <span class="rating-label na">N/A</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="planningComments" class="form-label">Observaciones</label>
+                            <textarea id="planningComments" name="planningComments" class="form-textarea" 
+                                      rows="3" placeholder="Ejemplos de planificación y organización observados..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Criterio 8: Liderazgo por Ejemplo -->
+                    <div class="evaluation-item">
+                        <div class="criterion-header">
+                            <h3 class="criterion-title">8. Liderazgo por Ejemplo (Modelaje)</h3>
+                            <span class="required-badge">Requerido</span>
+                        </div>
+                        <p class="criterion-description">
+                            Demuestra con su conducta los valores, actitudes y comportamientos esperados del equipo.
+                        </p>
+                        <div class="rating-group">
+                            <label class="rating-option">
+                                <input type="radio" name="roleModel" value="5" required>
+                                <span class="rating-label excellent">Excelente (5)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="roleModel" value="4">
+                                <span class="rating-label good">Bueno (4)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="roleModel" value="3">
+                                <span class="rating-label regular">Regular (3)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="roleModel" value="2">
+                                <span class="rating-label poor">Deficiente (2)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="roleModel" value="1">
+                                <span class="rating-label critical">Crítico (1)</span>
+                            </label>
+                            <label class="rating-option">
+                                <input type="radio" name="roleModel" value="0">
+                                <span class="rating-label na">N/A</span>
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="roleModelComments" class="form-label">Observaciones</label>
+                            <textarea id="roleModelComments" name="roleModelComments" class="form-textarea" 
+                                      rows="3" placeholder="Comportamientos ejemplares observados..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 3: RESUMEN Y PLAN DE ACCIÓN -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">📊</span>
+                            Resumen y Plan de Acción
+                        </h2>
+                    </div>
+
+                    <!-- Puntuación Total -->
+                    <div class="score-summary">
+                        <div class="score-card">
+                            <span class="score-label">Puntuación Total</span>
+                            <span class="score-value" id="totalScore">0</span>
+                            <span class="score-max">/ 40</span>
+                        </div>
+                        <div class="score-card">
+                            <span class="score-label">Promedio</span>
+                            <span class="score-value" id="averageScore">0.0</span>
+                            <span class="score-max">/ 5.0</span>
+                        </div>
+                        <div class="score-card">
+                            <span class="score-label">Nivel de Desempeño</span>
+                            <span class="performance-badge" id="performanceLevel">Sin evaluar</span>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label for="strengths" class="form-label">Fortalezas Identificadas</label>
+                            <textarea id="strengths" name="strengths" class="form-textarea" rows="4" 
+                                      placeholder="Describa las principales fortalezas observadas en el liderazgo..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="areasImprovement" class="form-label">Áreas de Mejora</label>
+                            <textarea id="areasImprovement" name="areasImprovement" class="form-textarea" rows="4" 
+                                      placeholder="Identifique las áreas que requieren desarrollo o mejora..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="actionPlan" class="form-label">Plan de Acción Propuesto</label>
+                            <textarea id="actionPlan" name="actionPlan" class="form-textarea" rows="5" 
+                                      placeholder="Detalle las acciones específicas a implementar, plazos y responsables..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="additionalComments" class="form-label">Comentarios Adicionales</label>
+                            <textarea id="additionalComments" name="additionalComments" class="form-textarea" rows="4" 
+                                      placeholder="Cualquier observación adicional relevante..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN 4: FIRMA Y VALIDACIÓN -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">✍️</span>
+                            Validación del Formulario
+                        </h2>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="followUpDate" class="form-label">Fecha de Seguimiento</label>
+                            <input type="date" id="followUpDate" name="followUpDate" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nextReviewDate" class="form-label">Próxima Revisión</label>
+                            <input type="date" id="nextReviewDate" name="nextReviewDate" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="validation-info">
+                        <p><strong>Nota:</strong> Al descargar el PDF, se registrará automáticamente la fecha y hora de generación del documento.</p>
+                    </div>
+                </section>
+
+                <!-- Botones de Acción -->
+                <div class="form-actions">
+                    <button type="button" id="clearBtn" class="btn btn-secondary">
+                        <span class="btn-icon">🗑️</span>
+                        Limpiar Formulario
+                    </button>
+                    
+                    <button type="button" id="saveBtn" class="btn btn-info">
+                        <span class="btn-icon">💾</span>
+                        Guardar Borrador
+                    </button>
+                    
+                    <button type="button" id="downloadPdfBtn" class="btn btn-primary">
+                        <span class="btn-icon">📄</span>
+                        Descargar PDF
+                    </button>
+                </div>
+
+            </form>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Lista de Verificación - Liderazgo en Terreno v1.0</p>
+            <p class="footer-note">Todos los datos se guardan localmente en su dispositivo</p>
+        </footer>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">⚠️ Confirmación</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">¿Está seguro de que desea realizar esta acción?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="modalCancelBtn" class="btn btn-secondary">Cancelar</button>
+                <button type="button" id="modalConfirmBtn" class="btn btn-danger">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast de Notificaciones -->
+    <div id="toast" class="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="app.js"></script>
+    
+    <!-- PWA Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => console.log('ServiceWorker registrado:', registration))
+                    .catch(error => console.log('Error al registrar ServiceWorker:', error));
+            });
+        }
+    </script>
+</body>
+</html>
