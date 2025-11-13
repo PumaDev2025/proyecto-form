@@ -468,12 +468,202 @@ async function generatePDF() {
     doc.text('3. Después de la Visita', margin, yPosition);
     yPosition += 10;
     
-    // Nota: Las tablas se incluirían aquí, simplificadas para el PDF
-    doc.setTextColor(...textColor);
-    doc.setFontSize(10);
-    doc.setFont(undefined, 'italic');
-    doc.text('Ver formulario completo para detalles de hallazgos y plan de acción', margin, yPosition);
-    yPosition += 10;
+    // Tabla 1: Matriz de Hallazgos
+    checkPageBreak(15);
+    doc.setTextColor(...secondaryColor);
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'bold');
+    doc.text('3.1 Matriz de Hallazgos', margin, yPosition);
+    yPosition += 8;
+    
+    // Obtener filas de hallazgos
+    const findingsTable = document.getElementById('findingsTableBody');
+    const findingsRows = findingsTable.querySelectorAll('tr');
+    let findingsCount = 0;
+    
+    findingsRows.forEach((row, index) => {
+        const cells = row.querySelectorAll('textarea');
+        const hasData = Array.from(cells).some(cell => cell.value.trim());
+        
+        if (hasData) {
+            findingsCount++;
+            checkPageBreak(30);
+            
+            doc.setTextColor(...textColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'bold');
+            doc.text(`Hallazgo ${findingsCount}:`, margin + 3, yPosition);
+            yPosition += 5;
+            
+            doc.setFont(undefined, 'normal');
+            
+            // Operación/actividad
+            if (cells[0]?.value.trim()) {
+                doc.setFont(undefined, 'bold');
+                doc.text('Operación/actividad:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const text = doc.splitTextToSize(cells[0].value, contentWidth - 10);
+                doc.text(text, margin + 5, yPosition + 4);
+                yPosition += 4 + (text.length * 4);
+            }
+            
+            // Riesgo asociado
+            if (cells[1]?.value.trim()) {
+                doc.setFont(undefined, 'bold');
+                doc.text('Riesgo asociado:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const text = doc.splitTextToSize(cells[1].value, contentWidth - 10);
+                doc.text(text, margin + 5, yPosition + 4);
+                yPosition += 4 + (text.length * 4);
+            }
+            
+            // Fallo latente
+            if (cells[2]?.value.trim()) {
+                doc.setFont(undefined, 'bold');
+                doc.text('Fallo latente:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const text = doc.splitTextToSize(cells[2].value, contentWidth - 10);
+                doc.text(text, margin + 5, yPosition + 4);
+                yPosition += 4 + (text.length * 4);
+            }
+            
+            // Mejoras propuestas
+            if (cells[3]?.value.trim()) {
+                doc.setFont(undefined, 'bold');
+                doc.text('Mejoras propuestas:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const text = doc.splitTextToSize(cells[3].value, contentWidth - 10);
+                doc.text(text, margin + 5, yPosition + 4);
+                yPosition += 4 + (text.length * 4);
+            }
+            
+            // Derivado a
+            if (cells[4]?.value.trim()) {
+                doc.setFont(undefined, 'bold');
+                doc.text('Derivado a:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const text = doc.splitTextToSize(cells[4].value, contentWidth - 10);
+                doc.text(text, margin + 5, yPosition + 4);
+                yPosition += 4 + (text.length * 4);
+            }
+            
+            yPosition += 3;
+            
+            // Línea separadora
+            doc.setDrawColor(...lightGray);
+            doc.line(margin, yPosition, pageWidth - margin, yPosition);
+            yPosition += 5;
+        }
+    });
+    
+    if (findingsCount === 0) {
+        doc.setTextColor(...textColor);
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'italic');
+        doc.text('No se registraron hallazgos', margin + 3, yPosition);
+        yPosition += 8;
+    }
+    
+    // Tabla 2: Plan de Acción
+    checkPageBreak(15);
+    doc.setTextColor(...secondaryColor);
+    doc.setFontSize(12);
+    doc.setFont(undefined, 'bold');
+    doc.text('3.2 Plan de Acción', margin, yPosition);
+    yPosition += 8;
+    
+    // Obtener filas de plan de acción
+    const actionTable = document.getElementById('actionPlanTableBody');
+    const actionRows = actionTable.querySelectorAll('tr');
+    let actionsCount = 0;
+    
+    actionRows.forEach((row, index) => {
+        const textareas = row.querySelectorAll('textarea');
+        const inputs = row.querySelectorAll('input');
+        const hasData = Array.from(textareas).some(cell => cell.value.trim()) || 
+                       Array.from(inputs).some(input => input.value.trim());
+        
+        if (hasData) {
+            actionsCount++;
+            checkPageBreak(25);
+            
+            doc.setTextColor(...textColor);
+            doc.setFontSize(10);
+            doc.setFont(undefined, 'bold');
+            doc.text(`Acción ${actionsCount}:`, margin + 3, yPosition);
+            yPosition += 5;
+            
+            doc.setFont(undefined, 'normal');
+            
+            // Riesgo crítico
+            if (textareas[0]?.value.trim()) {
+                doc.setFont(undefined, 'bold');
+                doc.text('Riesgo crítico:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const text = doc.splitTextToSize(textareas[0].value, contentWidth - 10);
+                doc.text(text, margin + 5, yPosition + 4);
+                yPosition += 4 + (text.length * 4);
+            }
+            
+            // Solución propuesta
+            if (textareas[1]?.value.trim()) {
+                doc.setFont(undefined, 'bold');
+                doc.text('Solución propuesta:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const text = doc.splitTextToSize(textareas[1].value, contentWidth - 10);
+                doc.text(text, margin + 5, yPosition + 4);
+                yPosition += 4 + (text.length * 4);
+            }
+            
+            // Responsable
+            if (inputs[0]?.value.trim()) {
+                checkPageBreak(5);
+                doc.setFont(undefined, 'bold');
+                doc.text('Responsable:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const text = doc.splitTextToSize(inputs[0].value, contentWidth - 10);
+                doc.text(text, margin + 5, yPosition + 4);
+                yPosition += 4 + (text.length * 4) + 1;
+            }
+            
+            // Plazo
+            if (inputs[1]?.value.trim()) {
+                checkPageBreak(5);
+                doc.setFont(undefined, 'bold');
+                doc.text('Plazo:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const deadline = new Date(inputs[1].value);
+                doc.text(formatDate(deadline), margin + 5, yPosition + 4);
+                yPosition += 8;
+            }
+            
+            // Retroalimentación
+            if (inputs[2]?.value.trim()) {
+                checkPageBreak(5);
+                doc.setFont(undefined, 'bold');
+                doc.text('Retroalimentación:', margin + 5, yPosition);
+                doc.setFont(undefined, 'normal');
+                const feedback = new Date(inputs[2].value);
+                doc.text(formatDate(feedback), margin + 5, yPosition + 4);
+                yPosition += 8;
+            }
+            
+            yPosition += 3;
+            
+            // Línea separadora
+            doc.setDrawColor(...lightGray);
+            doc.line(margin, yPosition, pageWidth - margin, yPosition);
+            yPosition += 5;
+        }
+    });
+    
+    if (actionsCount === 0) {
+        doc.setTextColor(...textColor);
+        doc.setFontSize(10);
+        doc.setFont(undefined, 'italic');
+        doc.text('No se definieron acciones', margin + 3, yPosition);
+        yPosition += 8;
+    }
     
     // PIE DE PÁGINA
     const totalPages = doc.internal.pages.length - 1;
