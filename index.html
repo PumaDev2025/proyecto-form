@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Lista de Verificación de Liderazgo en Terreno">
+    <meta name="description" content="Programa de Cultura de Seguridad - Liderazgo Visible en Terreno PUMA">
     <meta name="theme-color" content="#2c3e50">
     
-    <title>Lista de Verificación - Liderazgo en Terreno</title>
+    <title>PUMA - Liderazgo Visible en Terreno</title>
     
     <!-- PWA Meta Tags -->
     <link rel="manifest" href="manifest.json">
@@ -15,6 +15,173 @@
     
     <!-- Estilos -->
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .puma-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .visit-focus-table {
+            margin-top: 1rem;
+        }
+        
+        .focus-item {
+            background: white;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .focus-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .focus-header input[type="radio"] {
+            margin-top: 0.25rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .focus-header label {
+            cursor: pointer;
+            flex: 1;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .focus-description {
+            margin-left: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .question-group {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--secondary-color);
+        }
+        
+        .question-number {
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .question-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .field-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .subsection-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .attitude-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .attitude-option {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .attitude-option:hover {
+            border-color: var(--secondary-color);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .attitude-option input[type="radio"]:checked + label {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
+            box-shadow: var(--shadow-sm);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .data-table input[type="text"],
+        .data-table textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: var(--font-family);
+        }
+        
+        .data-table textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        
+        .add-row-btn {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .add-row-btn:hover {
+            background: var(--secondary-dark);
+        }
+    </style>
 </head>
 <body>
     <!-- Indicador de guardado automático -->
@@ -53,41 +220,35 @@
                         <div class="form-group">
                             <label for="visitorName" class="form-label required">Nombre de quien visita *</label>
                             <input type="text" id="visitorName" name="visitorName" class="form-input" required 
-                                   placeholder="Ingrese su nombre completo" aria-required="true">
-                            <span class="error-message" data-error="visitorName"></span>
+                                   placeholder="Ingrese su nombre completo">
                         </div>
 
                         <div class="form-group">
                             <label for="visitDate" class="form-label required">Fecha *</label>
-                            <input type="date" id="visitDate" name="visitDate" class="form-input" required aria-required="true">
-                            <span class="error-message" data-error="visitDate"></span>
+                            <input type="date" id="visitDate" name="visitDate" class="form-input" required>
                         </div>
 
                         <div class="form-group">
                             <label for="visitTime" class="form-label required">Hora *</label>
-                            <input type="time" id="visitTime" name="visitTime" class="form-input" required aria-required="true">
-                            <span class="error-message" data-error="visitTime"></span>
+                            <input type="time" id="visitTime" name="visitTime" class="form-input" required>
                         </div>
 
                         <div class="form-group">
                             <label for="workCenter" class="form-label required">Centro de trabajo *</label>
                             <input type="text" id="workCenter" name="workCenter" class="form-input" required 
-                                   placeholder="Ej: Planta Norte" aria-required="true">
-                            <span class="error-message" data-error="workCenter"></span>
+                                   placeholder="Ej: Planta Norte">
                         </div>
 
                         <div class="form-group full-width">
                             <label for="operationLocation" class="form-label required">Operación/lugar a visitar *</label>
                             <input type="text" id="operationLocation" name="operationLocation" class="form-input" required 
-                                   placeholder="Especifique la operación o lugar" aria-required="true">
-                            <span class="error-message" data-error="operationLocation"></span>
+                                   placeholder="Especifique la operación o lugar">
                         </div>
 
                         <div class="form-group full-width">
                             <label for="criticalRisk" class="form-label required">Riesgo crítico a observar *</label>
                             <input type="text" id="criticalRisk" name="criticalRisk" class="form-input" required 
-                                   placeholder="Indique el riesgo crítico" aria-required="true">
-                            <span class="error-message" data-error="criticalRisk"></span>
+                                   placeholder="Indique el riesgo crítico">
                         </div>
                     </div>
 
@@ -145,470 +306,424 @@
                                 </p>
                             </div>
                         </div>
-                        <span class="error-message" data-error="visitFocus"></span>
                     </div>
                 </section>
 
-                <!-- SECCIÓN 2: CRITERIOS DE EVALUACIÓN -->
+                <!-- SECCIÓN 2: DURANTE LA VISITA -->
                 <section class="form-section">
                     <div class="section-header">
                         <h2 class="section-title">
-                            <span class="section-icon">⭐</span>
-                            Criterios de Evaluación de Liderazgo
+                            <span class="section-icon">👁️</span>
+                            2. Durante la Visita
                         </h2>
-                        <p class="section-description">
-                            Evalúe cada criterio seleccionando el nivel de cumplimiento observado durante la visita en terreno.
-                        </p>
                     </div>
 
-                    <!-- Escala de evaluación -->
-                    <div class="evaluation-scale">
-                        <div class="scale-item scale-excellent">
-                            <span class="scale-icon">🟢</span>
-                            <strong>Excelente (5)</strong>
-                            <p>Cumplimiento excepcional</p>
+                    <!-- 2.1 INDAGACIÓN GENERAL -->
+                    <h3 class="subsection-title">2.1 Indagación General</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.</span>
+                            ¿Cómo evaluaría la seguridad de su lugar de trabajo?
                         </div>
-                        <div class="scale-item scale-good">
-                            <span class="scale-icon">🔵</span>
-                            <strong>Bueno (4)</strong>
-                            <p>Cumplimiento satisfactorio</p>
-                        </div>
-                        <div class="scale-item scale-regular">
-                            <span class="scale-icon">🟡</span>
-                            <strong>Regular (3)</strong>
-                            <p>Cumplimiento mínimo</p>
-                        </div>
-                        <div class="scale-item scale-poor">
-                            <span class="scale-icon">🟠</span>
-                            <strong>Deficiente (2)</strong>
-                            <p>Necesita mejorar</p>
-                        </div>
-                        <div class="scale-item scale-critical">
-                            <span class="scale-icon">🔴</span>
-                            <strong>Crítico (1)</strong>
-                            <p>No cumple</p>
-                        </div>
-                        <div class="scale-item scale-na">
-                            <span class="scale-icon">⚪</span>
-                            <strong>N/A</strong>
-                            <p>No aplica</p>
-                        </div>
+                        <textarea name="q2_1_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
                     </div>
 
-                    <!-- Criterio 1: Comunicación -->
-                    <div class="evaluation-item">
-                        <div class="criterion-header">
-                            <h3 class="criterion-title">1. Comunicación Efectiva</h3>
-                            <span class="required-badge">Requerido</span>
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">2.</span>
+                            ¿Qué aspectos consideran podrían mantenerse de lo que actualmente se está haciendo?
                         </div>
-                        <p class="criterion-description">
-                            El líder comunica de manera clara, directa y oportuna las metas, expectativas y retroalimentación al equipo.
-                        </p>
-                        <div class="rating-group">
-                            <label class="rating-option">
-                                <input type="radio" name="communication" value="5" required>
-                                <span class="rating-label excellent">Excelente (5)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="communication" value="4">
-                                <span class="rating-label good">Bueno (4)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="communication" value="3">
-                                <span class="rating-label regular">Regular (3)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="communication" value="2">
-                                <span class="rating-label poor">Deficiente (2)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="communication" value="1">
-                                <span class="rating-label critical">Crítico (1)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="communication" value="0">
-                                <span class="rating-label na">N/A</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="communicationComments" class="form-label">Observaciones</label>
-                            <textarea id="communicationComments" name="communicationComments" class="form-textarea" 
-                                      rows="3" placeholder="Detalles específicos sobre la comunicación observada..."></textarea>
-                        </div>
+                        <textarea name="q2_1_2" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
                     </div>
 
-                    <!-- Criterio 2: Presencia en Terreno -->
-                    <div class="evaluation-item">
-                        <div class="criterion-header">
-                            <h3 class="criterion-title">2. Presencia Activa en Terreno</h3>
-                            <span class="required-badge">Requerido</span>
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.</span>
+                            ¿Qué considera podría cambiar?
                         </div>
-                        <p class="criterion-description">
-                            El líder está presente físicamente en el área de trabajo, interactuando con el equipo y supervisando operaciones.
-                        </p>
-                        <div class="rating-group">
-                            <label class="rating-option">
-                                <input type="radio" name="presence" value="5" required>
-                                <span class="rating-label excellent">Excelente (5)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="presence" value="4">
-                                <span class="rating-label good">Bueno (4)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="presence" value="3">
-                                <span class="rating-label regular">Regular (3)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="presence" value="2">
-                                <span class="rating-label poor">Deficiente (2)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="presence" value="1">
-                                <span class="rating-label critical">Crítico (1)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="presence" value="0">
-                                <span class="rating-label na">N/A</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="presenceComments" class="form-label">Observaciones</label>
-                            <textarea id="presenceComments" name="presenceComments" class="form-textarea" 
-                                      rows="3" placeholder="Descripción de la presencia y actividad en terreno..."></textarea>
-                        </div>
+                        <textarea name="q2_1_3" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
                     </div>
 
-                    <!-- Criterio 3: Resolución de Problemas -->
-                    <div class="evaluation-item">
-                        <div class="criterion-header">
-                            <h3 class="criterion-title">3. Resolución de Problemas</h3>
-                            <span class="required-badge">Requerido</span>
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.</span>
+                            ¿Hay algún riesgo que considere no está controlado actualmente?
                         </div>
-                        <p class="criterion-description">
-                            Capacidad para identificar, analizar y resolver problemas de manera eficiente, involucrando al equipo cuando es necesario.
-                        </p>
-                        <div class="rating-group">
-                            <label class="rating-option">
-                                <input type="radio" name="problemSolving" value="5" required>
-                                <span class="rating-label excellent">Excelente (5)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="problemSolving" value="4">
-                                <span class="rating-label good">Bueno (4)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="problemSolving" value="3">
-                                <span class="rating-label regular">Regular (3)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="problemSolving" value="2">
-                                <span class="rating-label poor">Deficiente (2)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="problemSolving" value="1">
-                                <span class="rating-label critical">Crítico (1)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="problemSolving" value="0">
-                                <span class="rating-label na">N/A</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="problemSolvingComments" class="form-label">Observaciones</label>
-                            <textarea id="problemSolvingComments" name="problemSolvingComments" class="form-textarea" 
-                                      rows="3" placeholder="Ejemplos de resolución de problemas observados..."></textarea>
-                        </div>
+                        <textarea name="q2_1_4" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
                     </div>
 
-                    <!-- Criterio 4: Trabajo en Equipo -->
-                    <div class="evaluation-item">
-                        <div class="criterion-header">
-                            <h3 class="criterion-title">4. Fomento del Trabajo en Equipo</h3>
-                            <span class="required-badge">Requerido</span>
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">5.</span>
+                            ¿Se realiza el HCR/ART en conjunto y se dan a conocer las actividades, riesgos y medidas de control antes de iniciar los trabajos?
                         </div>
-                        <p class="criterion-description">
-                            Promueve la colaboración, reconoce contribuciones y crea un ambiente de confianza y respeto mutuo.
-                        </p>
-                        <div class="rating-group">
-                            <label class="rating-option">
-                                <input type="radio" name="teamwork" value="5" required>
-                                <span class="rating-label excellent">Excelente (5)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="teamwork" value="4">
-                                <span class="rating-label good">Bueno (4)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="teamwork" value="3">
-                                <span class="rating-label regular">Regular (3)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="teamwork" value="2">
-                                <span class="rating-label poor">Deficiente (2)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="teamwork" value="1">
-                                <span class="rating-label critical">Crítico (1)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="teamwork" value="0">
-                                <span class="rating-label na">N/A</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="teamworkComments" class="form-label">Observaciones</label>
-                            <textarea id="teamworkComments" name="teamworkComments" class="form-textarea" 
-                                      rows="3" placeholder="Evidencias de trabajo en equipo y colaboración..."></textarea>
-                        </div>
+                        <textarea name="q2_1_5" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
                     </div>
 
-                    <!-- Criterio 5: Seguridad y Cumplimiento -->
-                    <div class="evaluation-item">
-                        <div class="criterion-header">
-                            <h3 class="criterion-title">5. Seguridad y Cumplimiento Normativo</h3>
-                            <span class="required-badge">Requerido</span>
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">6.</span>
+                            ¿Se aplican las Reglas por la Vida de un PUMA?
                         </div>
-                        <p class="criterion-description">
-                            Asegura el cumplimiento de normas de seguridad, procedimientos y estándares de calidad en todas las actividades.
-                        </p>
-                        <div class="rating-group">
-                            <label class="rating-option">
-                                <input type="radio" name="safety" value="5" required>
-                                <span class="rating-label excellent">Excelente (5)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="safety" value="4">
-                                <span class="rating-label good">Bueno (4)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="safety" value="3">
-                                <span class="rating-label regular">Regular (3)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="safety" value="2">
-                                <span class="rating-label poor">Deficiente (2)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="safety" value="1">
-                                <span class="rating-label critical">Crítico (1)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="safety" value="0">
-                                <span class="rating-label na">N/A</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="safetyComments" class="form-label">Observaciones</label>
-                            <textarea id="safetyComments" name="safetyComments" class="form-textarea" 
-                                      rows="3" placeholder="Aspectos de seguridad y cumplimiento observados..."></textarea>
-                        </div>
+                        <textarea name="q2_1_6" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
                     </div>
 
-                    <!-- Criterio 6: Desarrollo del Equipo -->
-                    <div class="evaluation-item">
-                        <div class="criterion-header">
-                            <h3 class="criterion-title">6. Desarrollo y Capacitación del Equipo</h3>
-                            <span class="required-badge">Requerido</span>
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">7.</span>
+                            ¿Se realiza el MOT antes del inicio de cada jornada de trabajo?
                         </div>
-                        <p class="criterion-description">
-                            Identifica necesidades de capacitación, desarrolla habilidades del equipo y promueve el crecimiento profesional.
-                        </p>
-                        <div class="rating-group">
-                            <label class="rating-option">
-                                <input type="radio" name="development" value="5" required>
-                                <span class="rating-label excellent">Excelente (5)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="development" value="4">
-                                <span class="rating-label good">Bueno (4)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="development" value="3">
-                                <span class="rating-label regular">Regular (3)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="development" value="2">
-                                <span class="rating-label poor">Deficiente (2)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="development" value="1">
-                                <span class="rating-label critical">Crítico (1)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="development" value="0">
-                                <span class="rating-label na">N/A</span>
-                            </label>
+                        <textarea name="q2_1_7" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">8.</span>
+                            ¿Cómo cree podría mejorarse?
                         </div>
-                        <div class="form-group">
-                            <label for="developmentComments" class="form-label">Observaciones</label>
-                            <textarea id="developmentComments" name="developmentComments" class="form-textarea" 
-                                      rows="3" placeholder="Acciones de desarrollo y capacitación identificadas..."></textarea>
+                        <textarea name="q2_1_8" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">9.</span>
+                            Actualmente, en su lugar de trabajo, ¿hay alguna acción que normalmente se esté haciendo y que, de continuar de dicha manera, podría generar un accidente?
+                        </div>
+                        <textarea name="q2_1_9" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <!-- 2.2 VERIFICACIÓN DE IMPLEMENTACIÓN -->
+                    <h3 class="subsection-title">2.2 Verificación de Implementación (Intervenciones)</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.</span>
+                            ¿Cómo evaluaría la efectividad de la medida implementada?
+                        </div>
+                        <textarea name="q2_2_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">2.</span>
+                            ¿Considera que logra controlar todos los riesgos asociados, o podría mejorarse de alguna manera?
+                        </div>
+                        <textarea name="q2_2_2" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.</span>
+                            Desde su perspectiva, ¿esta situación resuelve el riesgo detectado?
+                        </div>
+                        <textarea name="q2_2_3" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.</span>
+                            En esta misma operación, ¿hay alguna otra situación que podría generar un riesgo importante?
+                        </div>
+                        <textarea name="q2_2_4" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.1</span>
+                            De ser así, ¿cómo cree podría mejorarse?
+                        </div>
+                        <textarea name="q2_2_4_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">5.</span>
+                            ¿Cómo considera podría mejorarse, a nivel general, la seguridad de su lugar de trabajo?
+                        </div>
+                        <textarea name="q2_2_5" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <!-- 2.3 DE FOCO CRÍTICO -->
+                    <h3 class="subsection-title">2.3 De Foco Crítico</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.</span>
+                            De todas las actividades que usted realiza, ¿qué operación considera crítica en sentido de tener el potencial de generar un accidente grave tanto para usted como para sus compañeros?
+                        </div>
+                        <textarea name="q2_3_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">2.</span>
+                            ¿Se analizan en el HCR/ART y se dejan estipuladas en el MOT?
+                        </div>
+                        <textarea name="q2_3_2" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.</span>
+                            De esas operaciones, ¿cuáles son sus riesgos críticos o aquellos que pueden generar accidentes graves?
+                        </div>
+                        <textarea name="q2_3_3" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.</span>
+                            ¿Hay alguna situación de seguridad que, actualmente, no esté controlada de su lugar de trabajo y que considere importante de abordar?
+                        </div>
+                        <textarea name="q2_3_4" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">5.</span>
+                            Desde su perspectiva, ¿qué mejoras considera se podrían hacer para mejorar la seguridad de su lugar de trabajo?
+                        </div>
+                        <textarea name="q2_3_5" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">6.</span>
+                            ¿Ha observado alguna situación, no sólo de su puesto de trabajo, sino de otras operaciones, en que considere podría haber un riesgo importante de abordar?
+                        </div>
+                        <textarea name="q2_3_6" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <!-- 2.4 DE SOSPECHA DE RIESGO EMERGENTE -->
+                    <h3 class="subsection-title">2.4 De Sospecha de Riesgo Emergente</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.</span>
+                            ¿Qué riesgos logra identificar en la operación que está ejecutando?
+                        </div>
+                        <textarea name="q2_4_1" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">2.</span>
+                            ¿Cómo considera que es el control de los riesgos en ejecución?
+                        </div>
+                        <textarea name="q2_4_2" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.</span>
+                            De esas operaciones, ¿cuáles son sus riesgos críticos o aquellos que pueden generar accidentes graves?
+                        </div>
+                        <textarea name="q2_4_3" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">4.</span>
+                            ¿Cómo considera se podría mejorar la seguridad de su operación?
+                        </div>
+                        <textarea name="q2_4_4" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">5.</span>
+                            De los controles que se han efectuado para evitar accidentes, ¿hay alguno que no esté funcionando correctamente, o alguna medida preventiva adicional a considerar?
+                        </div>
+                        <textarea name="q2_4_5" class="form-textarea" rows="3" 
+                                  placeholder="Respuesta del trabajador..."></textarea>
+                    </div>
+
+                    <!-- ACTITUD Y PERCEPCIÓN -->
+                    <h3 class="subsection-title">Actitud y Percepción Durante la Conversación</h3>
+                    
+                    <div class="form-group">
+                        <label class="form-label">1.1 ¿Cómo fue la actitud del entrevistado al momento de conversar?</label>
+                        <div class="attitude-options">
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude1_open" name="intervieweeAttitude" value="abierta">
+                                <label for="attitude1_open">Abierta, agradable</label>
+                            </div>
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude1_neutral" name="intervieweeAttitude" value="neutral">
+                                <label for="attitude1_neutral">Neutral, reservada</label>
+                            </div>
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude1_closed" name="intervieweeAttitude" value="cerrada">
+                                <label for="attitude1_closed">Cerrada, suspicaz</label>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Criterio 7: Planificación y Organización -->
-                    <div class="evaluation-item">
-                        <div class="criterion-header">
-                            <h3 class="criterion-title">7. Planificación y Organización</h3>
-                            <span class="required-badge">Requerido</span>
-                        </div>
-                        <p class="criterion-description">
-                            Establece prioridades claras, planifica actividades y organiza recursos de manera efectiva.
-                        </p>
-                        <div class="rating-group">
-                            <label class="rating-option">
-                                <input type="radio" name="planning" value="5" required>
-                                <span class="rating-label excellent">Excelente (5)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="planning" value="4">
-                                <span class="rating-label good">Bueno (4)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="planning" value="3">
-                                <span class="rating-label regular">Regular (3)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="planning" value="2">
-                                <span class="rating-label poor">Deficiente (2)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="planning" value="1">
-                                <span class="rating-label critical">Crítico (1)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="planning" value="0">
-                                <span class="rating-label na">N/A</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="planningComments" class="form-label">Observaciones</label>
-                            <textarea id="planningComments" name="planningComments" class="form-textarea" 
-                                      rows="3" placeholder="Ejemplos de planificación y organización observados..."></textarea>
+                    <div class="form-group">
+                        <label class="form-label">1.2 ¿Cómo se sintió usted al momento de conversar?</label>
+                        <div class="attitude-options">
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude2_open" name="interviewerFeeling" value="abierta">
+                                <label for="attitude2_open">Abierta, agradable</label>
+                            </div>
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude2_neutral" name="interviewerFeeling" value="neutral">
+                                <label for="attitude2_neutral">Neutral, reservada</label>
+                            </div>
+                            <div class="attitude-option">
+                                <input type="radio" id="attitude2_closed" name="interviewerFeeling" value="cerrada">
+                                <label for="attitude2_closed">Cerrada, suspicaz</label>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Criterio 8: Liderazgo por Ejemplo -->
-                    <div class="evaluation-item">
-                        <div class="criterion-header">
-                            <h3 class="criterion-title">8. Liderazgo por Ejemplo (Modelaje)</h3>
-                            <span class="required-badge">Requerido</span>
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">1.3</span>
+                            ¿Cómo cree que podría mejorar, o qué considera faltó por indagar?
                         </div>
-                        <p class="criterion-description">
-                            Demuestra con su conducta los valores, actitudes y comportamientos esperados del equipo.
-                        </p>
-                        <div class="rating-group">
-                            <label class="rating-option">
-                                <input type="radio" name="roleModel" value="5" required>
-                                <span class="rating-label excellent">Excelente (5)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="roleModel" value="4">
-                                <span class="rating-label good">Bueno (4)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="roleModel" value="3">
-                                <span class="rating-label regular">Regular (3)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="roleModel" value="2">
-                                <span class="rating-label poor">Deficiente (2)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="roleModel" value="1">
-                                <span class="rating-label critical">Crítico (1)</span>
-                            </label>
-                            <label class="rating-option">
-                                <input type="radio" name="roleModel" value="0">
-                                <span class="rating-label na">N/A</span>
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="roleModelComments" class="form-label">Observaciones</label>
-                            <textarea id="roleModelComments" name="roleModelComments" class="form-textarea" 
-                                      rows="3" placeholder="Comportamientos ejemplares observados..."></textarea>
-                        </div>
+                        <textarea name="improvementNotes" class="form-textarea" rows="4" 
+                                  placeholder="Reflexión sobre la entrevista..."></textarea>
                     </div>
                 </section>
 
-                <!-- SECCIÓN 3: RESUMEN Y PLAN DE ACCIÓN -->
+                <!-- SECCIÓN 3: DESPUÉS DE LA VISITA -->
                 <section class="form-section">
                     <div class="section-header">
                         <h2 class="section-title">
                             <span class="section-icon">📊</span>
-                            Resumen y Plan de Acción
+                            3. Después de la Visita
                         </h2>
                     </div>
 
-                    <!-- Puntuación Total -->
-                    <div class="score-summary">
-                        <div class="score-card">
-                            <span class="score-label">Puntuación Total</span>
-                            <span class="score-value" id="totalScore">0</span>
-                            <span class="score-max">/ 40</span>
-                        </div>
-                        <div class="score-card">
-                            <span class="score-label">Promedio</span>
-                            <span class="score-value" id="averageScore">0.0</span>
-                            <span class="score-max">/ 5.0</span>
-                        </div>
-                        <div class="score-card">
-                            <span class="score-label">Nivel de Desempeño</span>
-                            <span class="performance-badge" id="performanceLevel">Sin evaluar</span>
-                        </div>
+                    <p class="field-description">
+                        Recuerde volcar sus hallazgos en la matriz adjunta. Considere sólo los casilleros sobre los temas que efectivamente fueron abordados:
+                    </p>
+
+                    <!-- Tabla de Hallazgos -->
+                    <div class="form-group full-width">
+                        <label class="form-label">Matriz de Hallazgos</label>
+                        <table class="data-table" id="findingsTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%;">Operación crítica revisada</th>
+                                    <th style="width: 20%;">Riesgo crítico asociado</th>
+                                    <th style="width: 20%;">Riesgos latentes o activos mencionados</th>
+                                    <th style="width: 20%;">Posibles mejoras señaladas</th>
+                                    <th style="width: 20%;">Hallazgos referidos</th>
+                                </tr>
+                            </thead>
+                            <tbody id="findingsTableBody">
+                                <tr>
+                                    <td><textarea name="findings_operation_1" rows="3"></textarea></td>
+                                    <td><textarea name="findings_risk_1" rows="3"></textarea></td>
+                                    <td><textarea name="findings_latent_1" rows="3"></textarea></td>
+                                    <td><textarea name="findings_improvements_1" rows="3"></textarea></td>
+                                    <td><textarea name="findings_referred_1" rows="3"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <td><textarea name="findings_operation_2" rows="3"></textarea></td>
+                                    <td><textarea name="findings_risk_2" rows="3"></textarea></td>
+                                    <td><textarea name="findings_latent_2" rows="3"></textarea></td>
+                                    <td><textarea name="findings_improvements_2" rows="3"></textarea></td>
+                                    <td><textarea name="findings_referred_2" rows="3"></textarea></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="add-row-btn" onclick="addFindingsRow()">➕ Agregar Fila</button>
                     </div>
 
-                    <div class="form-grid">
-                        <div class="form-group full-width">
-                            <label for="strengths" class="form-label">Fortalezas Identificadas</label>
-                            <textarea id="strengths" name="strengths" class="form-textarea" rows="4" 
-                                      placeholder="Describa las principales fortalezas observadas en el liderazgo..."></textarea>
-                        </div>
+                    <p class="field-description" style="margin-top: 2rem;">
+                        Luego, seleccione los riesgos que considere críticos o pertinentes de solucionar:
+                    </p>
 
-                        <div class="form-group full-width">
-                            <label for="areasImprovement" class="form-label">Áreas de Mejora</label>
-                            <textarea id="areasImprovement" name="areasImprovement" class="form-textarea" rows="4" 
-                                      placeholder="Identifique las áreas que requieren desarrollo o mejora..."></textarea>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="actionPlan" class="form-label">Plan de Acción Propuesto</label>
-                            <textarea id="actionPlan" name="actionPlan" class="form-textarea" rows="5" 
-                                      placeholder="Detalle las acciones específicas a implementar, plazos y responsables..."></textarea>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="additionalComments" class="form-label">Comentarios Adicionales</label>
-                            <textarea id="additionalComments" name="additionalComments" class="form-textarea" rows="4" 
-                                      placeholder="Cualquier observación adicional relevante..."></textarea>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- SECCIÓN 4: FIRMA Y VALIDACIÓN -->
-                <section class="form-section">
-                    <div class="section-header">
-                        <h2 class="section-title">
-                            <span class="section-icon">✍️</span>
-                            Validación del Formulario
-                        </h2>
-                    </div>
-
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="followUpDate" class="form-label">Fecha de Seguimiento</label>
-                            <input type="date" id="followUpDate" name="followUpDate" class="form-input">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nextReviewDate" class="form-label">Próxima Revisión</label>
-                            <input type="date" id="nextReviewDate" name="nextReviewDate" class="form-input">
-                        </div>
+                    <!-- Tabla de Plan de Acción -->
+                    <div class="form-group full-width">
+                        <label class="form-label">Plan de Acción para Riesgos Críticos</label>
+                        <table class="data-table" id="actionPlanTable">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%;">Riesgo crítico detectado</th>
+                                    <th style="width: 25%;">Posible solución</th>
+                                    <th style="width: 20%;">Responsable de implementación</th>
+                                    <th style="width: 17.5%;">Plazo de implementación</th>
+                                    <th style="width: 17.5%;">Plazo para retroalimentar al trabajador</th>
+                                </tr>
+                            </thead>
+                            <tbody id="actionPlanTableBody">
+                                <tr>
+                                    <td><textarea name="action_risk_1" rows="3"></textarea></td>
+                                    <td><textarea name="action_solution_1" rows="3"></textarea></td>
+                                    <td><input type="text" name="action_responsible_1"></td>
+                                    <td><input type="date" name="action_deadline_1"></td>
+                                    <td><input type="date" name="action_feedback_1"></td>
+                                </tr>
+                                <tr>
+                                    <td><textarea name="action_risk_2" rows="3"></textarea></td>
+                                    <td><textarea name="action_solution_2" rows="3"></textarea></td>
+                                    <td><input type="text" name="action_responsible_2"></td>
+                                    <td><input type="date" name="action_deadline_2"></td>
+                                    <td><input type="date" name="action_feedback_2"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="add-row-btn" onclick="addActionPlanRow()">➕ Agregar Fila</button>
                     </div>
 
-                    <div class="validation-info">
-                        <p><strong>Nota:</strong> Al descargar el PDF, se registrará automáticamente la fecha y hora de generación del documento.</p>
+                    <!-- Retroalimentación al Trabajador -->
+                    <h3 class="subsection-title">Sobre la Retroalimentación al Trabajador</h3>
+                    
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.1</span>
+                            Sea concreto con lo reportado y cómo se resolverá o se resolvió, a fin de dar cuenta de que lo indicado pudo ser resuelto.
+                        </div>
+                        <textarea name="feedback_concrete" class="form-textarea" rows="3" 
+                                  placeholder="Descripción de cómo se abordará lo reportado..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.2</span>
+                            Reconozca y valore las sugerencias y reportes mencionadas por el trabajador, y agradezca su participación.
+                        </div>
+                        <textarea name="feedback_acknowledgment" class="form-textarea" rows="3" 
+                                  placeholder="Reconocimiento y agradecimiento..."></textarea>
+                    </div>
+
+                    <div class="question-group">
+                        <div class="question-text">
+                            <span class="question-number">3.3</span>
+                            Refuerce que se mantendrá su confidencialidad sobre lo indicado, a menos que el trabajador indique o solicite lo contrario.
+                        </div>
+                        <textarea name="feedback_confidentiality" class="form-textarea" rows="3" 
+                                  placeholder="Confirmación de confidencialidad..."></textarea>
                     </div>
                 </section>
 
@@ -635,7 +750,7 @@
 
         <!-- Footer -->
         <footer class="app-footer">
-            <p>Lista de Verificación - Liderazgo en Terreno v1.0</p>
+            <p>PUMA - Programa de Cultura de Seguridad v1.0</p>
             <p class="footer-note">Todos los datos se guardan localmente en su dispositivo</p>
         </footer>
     </div>
@@ -663,19 +778,48 @@
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="app.js"></script>
+    <script src="app_puma.js"></script>
     
     <!-- PWA Service Worker -->
     <script>
-        // Service Worker solo funciona con HTTPS o localhost con servidor
-        // Para uso local directo (file://), las funciones principales siguen disponibles
         if ('serviceWorker' in navigator && (window.location.protocol === 'https:' || window.location.hostname === 'localhost')) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('service-worker.js')
                     .then(registration => console.log('ServiceWorker registrado:', registration))
                     .catch(error => console.log('Nota: ServiceWorker no disponible en file://', error));
             });
+        }
+    </script>
+    
+    <script>
+        // Funciones para agregar filas a las tablas
+        let findingsRowCount = 2;
+        let actionPlanRowCount = 2;
+        
+        function addFindingsRow() {
+            findingsRowCount++;
+            const tbody = document.getElementById('findingsTableBody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><textarea name="findings_operation_${findingsRowCount}" rows="3"></textarea></td>
+                <td><textarea name="findings_risk_${findingsRowCount}" rows="3"></textarea></td>
+                <td><textarea name="findings_latent_${findingsRowCount}" rows="3"></textarea></td>
+                <td><textarea name="findings_improvements_${findingsRowCount}" rows="3"></textarea></td>
+                <td><textarea name="findings_referred_${findingsRowCount}" rows="3"></textarea></td>
+            `;
+        }
+        
+        function addActionPlanRow() {
+            actionPlanRowCount++;
+            const tbody = document.getElementById('actionPlanTableBody');
+            const newRow = tbody.insertRow();
+            newRow.innerHTML = `
+                <td><textarea name="action_risk_${actionPlanRowCount}" rows="3"></textarea></td>
+                <td><textarea name="action_solution_${actionPlanRowCount}" rows="3"></textarea></td>
+                <td><input type="text" name="action_responsible_${actionPlanRowCount}"></td>
+                <td><input type="date" name="action_deadline_${actionPlanRowCount}"></td>
+                <td><input type="date" name="action_feedback_${actionPlanRowCount}"></td>
+            `;
         }
     </script>
 </body>
