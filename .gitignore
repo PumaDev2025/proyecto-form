@@ -1,0 +1,47 @@
+# Archivos a ignorar en Git
+
+# Archivos temporales de Windows
+Thumbs.db
+Desktop.ini
+*.tmp
+
+# Archivos de Excel temporales
+~$*.xlsx
+~$*.xls
+
+# Archivos de respaldo
+*.backup
+*_backup.*
+*_BACKUP.*
+
+# Archivos de log
+*.log
+
+# Archivos de sistema macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node modules (si se usan en futuro)
+node_modules/
+package-lock.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+
+# Archivos específicos del proyecto
+README_ORIGINAL_BACKUP.md
+Copia de *.xlsx
