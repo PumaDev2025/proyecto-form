@@ -85,7 +85,7 @@ body {
     font-family: var(--font-family);
     line-height: 1.6;
     color: var(--text-primary);
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
     background-attachment: fixed;
     min-height: 100vh;
     padding: var(--spacing-sm);
@@ -256,11 +256,12 @@ body {
    SECCIONES DEL FORMULARIO
    ================================ */
 .form-section {
-    background: var(--bg-primary);
+    background: white;
     border-radius: var(--border-radius);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
-    border: 1px solid var(--border-color);
+    border: 1px solid #e0e7ee;
+    box-shadow: 0 2px 8px rgba(46, 76, 140, 0.08);
 }
 
 .section-header {
