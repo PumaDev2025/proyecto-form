@@ -5,7 +5,8 @@ const CONFIG = {
     AUTO_SAVE_INTERVAL: 30000, // 30 segundos
     STORAGE_KEY: 'pumaLeadershipFormData',
     TOAST_DURATION: 3000,
-    PDF_FILENAME_PREFIX: 'PUMA_Liderazgo_Terreno_'
+    PDF_FILENAME_PREFIX: 'PUMA_Liderazgo_Terreno_',
+    VERSION: '2.1.0' // Versión con Sección 3 completa en PDF
 };
 
 // ================================
